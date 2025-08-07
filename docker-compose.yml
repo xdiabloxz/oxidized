@@ -1,0 +1,14 @@
+version: '3.7'
+
+services:
+  oxidized:
+    build: .
+    container_name: oxidized
+    restart: always
+    volumes:
+      - ./oxidized/config:/root/.config/oxidized/config
+      - ./oxidized/router.db:/root/.config/oxidized/router.db
+    ports:
+      - "8888:8888"
+    environment:
+      - "OXIDIZED_REST_API=1"

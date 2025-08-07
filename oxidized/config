@@ -1,0 +1,17 @@
+---
+username: admin
+password: 99442152
+model: cisco
+interval: 3600
+rest: 0.0.0.0:8888
+source:
+  default: git
+  git:
+    repo: git://localhost/oxidized-git.git
+    user: oxidized
+output:
+  default: git
+  git:
+    user: Oxidized
+    email: oxidized@example.com
+    remote: git://localhost/oxidized-git.git
