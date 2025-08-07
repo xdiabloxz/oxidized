@@ -1,8 +1,8 @@
-# --- LINHA CRÍTICA ADICIONADA AQUI ---
-# Garante que a biblioteca principal do Oxidized seja carregada primeiro.
 require 'oxidized'
 
-class NetBox < Source
+# --- CORREÇÃO AQUI ---
+# Usamos o nome completo da classe: Oxidized::Source
+class NetBox < Oxidized::Source
   def initialize
     super
     @cfg = @cfg.model_map["netbox"]
