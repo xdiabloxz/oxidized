@@ -1,12 +1,9 @@
-# Dockerfile Final - Versão com Correção de Permissão Recursiva
+# Dockerfile de Diagnóstico
 
-# 1. Inicia com a imagem oficial e estável.
 FROM oxidized/oxidized:latest
 
-# 2. Cria o diretório para os plugins.
 RUN mkdir -p /home/oxidized/.config/oxidized/source/
 
-# 3. Cria o arquivo netbox.rb usando Heredoc.
 RUN <<EOF > /home/oxidized/.config/oxidized/source/netbox.rb
 class NetBox < Source
   def initialize
@@ -71,8 +68,8 @@ class NetBox < Source
 end
 EOF
 
-# --- CORREÇÃO FINAL E ABRANGENTE ---
-# 4. Muda o dono de TODA a pasta de configuração para o usuário 'oxidized'.
-# O '-R' (recursivo) garante que a pasta 'source' e o arquivo 'netbox.rb'
-# dentro dela também tenham a permissão corrigida.
 RUN chown -R oxidized:oxidized /home/oxidized/.config/oxidized
+
+# --- MUDANÇA PARA DIAGNÓSTICO ---
+# Sobrescreve o comando de início padrão para manter o contêiner vivo.
+CMD ["sleep", "3600"]
