@@ -1,4 +1,4 @@
-# Dockerfile Definitivo - Usando o método Heredoc (correto)
+# Dockerfile Definitivo - Versão Final com correção de permissão
 
 # 1. Inicia com a imagem oficial e estável.
 FROM oxidized/oxidized:latest
@@ -7,7 +7,6 @@ FROM oxidized/oxidized:latest
 RUN mkdir -p /home/oxidized/.config/oxidized/source/
 
 # 3. Usa um "Here Document" (<<EOF) para criar o arquivo netbox.rb de forma segura.
-#    Esta é a maneira correta de lidar com um bloco de texto de múltiplas linhas.
 RUN <<EOF > /home/oxidized/.config/oxidized/source/netbox.rb
 class NetBox < Source
   def initialize
@@ -88,3 +87,8 @@ class NetBox < Source
   end
 end
 EOF
+
+# --- ADIÇÃO FINAL E CRÍTICA ABAIXO ---
+# 4. Muda o dono do arquivo do plugin para o usuário 'oxidized',
+# que é quem roda a aplicação, permitindo que ele o leia.
+RUN chown oxidized:oxidized /home/oxidized/.config/oxidized/source/netbox.rb
