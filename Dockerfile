@@ -1,14 +1,7 @@
-# DOCKERFILE from ytti/oxidized
-FROM ruby:3.2.2
+# 1. Comece com a imagem oficial que já sabemos que funciona.
+# Usar uma versão específica é uma boa prática para estabilidade.
+FROM oxidized/oxidized:latest
 
-RUN apt-get update && \
-  DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
-  build-essential git-core libssh2-1-dev libssl-dev pkg-config \
-  cmake libgmp-dev && \
-  apt-get autoremove -y && \
-  apt-get clean && \
-  rm -rf /var/lib/apt/lists/*
-
-RUN gem install oxidized --no-document
-
-WORKDIR /root/.config/oxidized
+# 2. Instale o plugin (gem) para a fonte de dados do NetBox.
+# Esta é a única personalização que precisamos.
+RUN gem install oxidized-sourcer-netbox
