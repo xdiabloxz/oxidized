@@ -1,4 +1,7 @@
-# Conteúdo para o arquivo netbox.rb
+# --- LINHA CRÍTICA ADICIONADA AQUI ---
+# Garante que a biblioteca principal do Oxidized seja carregada primeiro.
+require 'oxidized'
+
 class NetBox < Source
   def initialize
     super
